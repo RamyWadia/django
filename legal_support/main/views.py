@@ -1,10 +1,27 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterFrom
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+from .models import Post
+from .forms import RegisterFrom
+from .forms import PostForm
 
 # Create your views here.
+
+@login_required(login_url="/login")
 def home(req):
-    return render(req, "main/home.html")
+    posts = Post.objects.all()
+
+    if req.method == "POST":
+        post_id = req.POST.get("post-id")
+        post = Post.objects.filter(id=post_id).first()
+        if post and post.author == req.user:
+            post.delete()
+    # if req.method == "PUT":
+    #     post_id = req.POST.get("post-id")
+    #     post = Post.objects.filter(id=post_id).first()
+    #     if post and post.author == req.user:
+    #         print(post.description)
+    return render(req, "main/home.html", {"posts": posts})
 
 def sign_up(req):
     if req.method == "POST":
@@ -16,3 +33,17 @@ def sign_up(req):
     else:
         form = RegisterFrom()
     return render(req, "registration/sign_up.html", {"form": form}) 
+
+@login_required(login_url="/login")
+def create_post(req):
+    if req.method == "POST":
+        form = PostForm(req.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = req.user
+            post.save()
+            return redirect("/home")
+    else:
+            form = PostForm()
+    return render(req, "main/create_post.html", {"form": form})
+
