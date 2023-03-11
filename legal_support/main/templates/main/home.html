@@ -1,6 +1,6 @@
 {% extends "main/base.html" %}
 {% block title %}
-Home Page
+<h1>Home Page</h1>
 {% endblock %}
 {% block content %}
 {% for post in posts %}
@@ -21,9 +21,6 @@ Home Page
             <form method="post">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger" name="post-id" value="{{post.id}}">Delete Post</button>
-            </form>
-            <form method="put">
-                <button type="submit" class="btn btn-danger" name="post-id" value="{{post.id}}">Update Post</button>
             </form>
             {% endif %}
         </div>

@@ -7,7 +7,6 @@ from .forms import PostForm
 
 # Create your views here.
 
-@login_required(login_url="/login")
 def home(req):
     posts = Post.objects.all()
 
@@ -16,11 +15,6 @@ def home(req):
         post = Post.objects.filter(id=post_id).first()
         if post and post.author == req.user:
             post.delete()
-    # if req.method == "PUT":
-    #     post_id = req.POST.get("post-id")
-    #     post = Post.objects.filter(id=post_id).first()
-    #     if post and post.author == req.user:
-    #         print(post.description)
     return render(req, "main/home.html", {"posts": posts})
 
 def sign_up(req):
