@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "main.apps.MainConfig",
+    "crispy_forms",
+    "crispy_bootstrap5",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -75,8 +78,12 @@ WSGI_APPLICATION = "legal_support.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "d4ilrbq70endlf",
+        "USER": "fsnwyooapsmefj",
+        "PASSWORD": "1e0d536ac0db48722131b6df4678ece028c2ff0dfa89ee9cd6d94e65a67587b6",
+        "HOST": "ec2-3-234-204-26.compute-1.amazonaws.com",
+        "PORT": "5432",
     }
 }
 
