@@ -3,7 +3,7 @@
 <h1>Home Page</h1>
 {% endblock %}
 {% block content %}
-{% for post in posts %}
+{% for post in post_list %}
 <div class="card mt-2">
     <div class="card-header">
         <strong>@{{ post.author.username }}</strong>
@@ -13,7 +13,8 @@
             <h5 class="card-title">{{post.title}}</h5>
             {% if user == post.author %}
             <p>{{post.description}}</p>
-            <a href="/details">Details</a>
+            <a href="/post_detail/{{post.id}}">Details</a>
+            <a href="/post_update/{{post.id}}">Update</a>
             {% endif %}
         </div>
         <div>
