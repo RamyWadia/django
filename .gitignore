@@ -9,6 +9,7 @@ media
 
 # Backup files # 
 *.bak 
+venv
 
 # If you are using PyCharm # 
 # User-specific stuff
