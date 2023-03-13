@@ -9,7 +9,7 @@ media
 
 # Backup files # 
 *.bak 
-venv
+djangoenv
 
 # If you are using PyCharm # 
 # User-specific stuff
